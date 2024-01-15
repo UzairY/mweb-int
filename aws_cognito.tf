@@ -15,9 +15,3 @@ resource "aws_cognito_user_pool_client" "CognitoPool_Client" {
     supported_identity_providers = ["COGNITO"]
     callback_urls = ["https://example.com"]
 }
-
-# resource "aws_cognito_user" "example" {
-#   user_pool_id = aws_cognito_user_pool.CognitoPool.id
-#   username = "uzair"
-#   password = "Test@123"
-# }

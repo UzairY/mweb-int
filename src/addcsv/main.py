@@ -42,10 +42,6 @@ def lambda_handler(event, context):
         csv_content = file_content.encode()
 
         key = folder+"/"+original_filename
-
-        # Get CSV file content from the request
-        # csv_content = base64.b64decode(event['body'])
-
         response = client.put_object(Body=csv_content, Bucket=bucket_name, Key=key)
 
 

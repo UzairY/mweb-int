@@ -9,9 +9,7 @@ def lambda_handler(event, context):
     if isinstance(event['body'], str):
         body_dict = json.loads(event['body'])
         filename = body_dict.get('filename')
-        # Use the values retrieved from the parsed JSON
     else:
-        # 'body' is already a dictionary
         filename = event['body'].get('filename')
 
     sub = event['requestContext']["authorizer"]['claims']['sub']
@@ -29,7 +27,6 @@ def lambda_handler(event, context):
             ExpiresIn=600
             )
 
-        # Return the encoded content as the API Gateway response
         return {
             'statusCode': 200,
             'headers': {
@@ -44,7 +41,6 @@ def lambda_handler(event, context):
         }
 
     except Exception as e:
-        # Handle any exceptions that might occur during the download
         return {
             'statusCode': 500,
             'body': f'Error downloading CSV file: {str(e)}'

@@ -7,8 +7,7 @@ client = boto3.client('cognito-idp')
 COGNITOCLIENT = os.environ["COGNITOCLIENT"]
 
 def lambda_handler(event, context):
-    # username = event['body']['username']
-    # password = event['body']['password']
+
     if isinstance(event['body'], str):
         body_dict = json.loads(event['body'])
         username = body_dict.get('username')
@@ -26,7 +25,6 @@ def lambda_handler(event, context):
             Password=password,
             UserAttributes=[
                 {'Name': 'email', 'Value': username},
-                # Add more attributes if needed
             ]
         )
         return {
