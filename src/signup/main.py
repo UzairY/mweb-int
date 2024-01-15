@@ -31,12 +31,12 @@ def lambda_handler(event, context):
         )
         return {
             'statusCode': 200,
-            'body': json.dumps(response)
+            'body': json.dumps({'message': 'New user is added successfully'})
         }
-    except client.exceptions.UsernameExistsException as e:
+    except (client.exceptions.UsernameExistsException,client.exceptions.ParamValidationError) as e:
         return {
             'statusCode': 400,
-            'body': json.dumps({'message': 'Username already exists'})
+            'body': json.dumps({'message': str(e)})
         }
     except Exception as e:
         return {

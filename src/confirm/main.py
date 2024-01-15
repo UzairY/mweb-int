@@ -27,25 +27,25 @@ def lambda_handler(event, context):
         )
         return {
             "statusCode": 200,
-            "body": "User confirmed successfully!"
+            "body": json.dumps({"message": "User confirmed successfully!"})
         }
     except client.exceptions.CodeMismatchException as e:
         return {
             "statusCode": 400,
-            "body": f"Invalid confirmation code: {str(e)}"
+            "body": json.dumps({"message": str(e)})
         }
     except client.exceptions.UserNotFoundException as e:
         return {
             "statusCode": 404,
-            "body": f"User not found: {str(e)}"
+            "body": json.dumps({"message": str(e)})
         }
     except client.exceptions.NotAuthorizedException as e:
         return {
             "statusCode": 400,
-            "body": f"User is already confirmed: {str(e)}"
+            "body": json.dumps({"message": str(e)})
         }
     except Exception as e:
         return {
             "statusCode": 500,
-            "body": f"An error occurred: {str(e)}"
+            "body": json.dumps({"message": str(e)})
         }

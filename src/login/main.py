@@ -28,6 +28,7 @@ def lambda_handler(event, context):
                 'PASSWORD': password
             }
         )
+        token=response['AuthenticationResult']['IdToken']
         return {
             'statusCode': 200,
             'headers': {
@@ -35,7 +36,7 @@ def lambda_handler(event, context):
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': '*'
             },
-            'body': json.dumps(response)
+            'body': json.dumps({'token': token})
         }
     except client.exceptions.NotAuthorizedException as e:
         return {
